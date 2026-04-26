@@ -1,0 +1,12 @@
+*.class
+*.html
+*.js
+*.css
+*.svg
+bin/
+build/
+doc/
+out/
+target/
+.vscode/
+.DS_Store
