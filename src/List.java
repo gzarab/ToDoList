@@ -1,15 +1,15 @@
 
 public class List {
-    private String day;
+    private int day;
     private int month;
     private int quant;
-    private StringBuilder entry;
+    private String entry;
     private String status;
 
     List(){
     status = "Done";
     }
-    List(StringBuilder entry, int quant, String status, String day, int month){
+    List(String entry, int quant, String status, int day, int month){
         this.entry = entry;
         this.quant = quant;
         this.status = status;
@@ -22,7 +22,7 @@ public class List {
     public boolean equals(List other){
         return (this.entry == other.entry);
     }
-    public void setEntry(StringBuilder entry){
+    public void setEntry(String entry){
         this.entry = entry;
     }
     public void setQuant(int quant){
@@ -34,10 +34,10 @@ public class List {
     public void setMonth(int month){
         this.month = month;
     }
-    public void setDay(String day){
+    public void setDay(int day){
         this.day = day;
     }
-    public StringBuilder getEntry(){
+    public String getEntry(){
         return this.entry;
     }
     public int getQuant(){
@@ -49,7 +49,7 @@ public class List {
     public int getMonth(){
         return this.month;
     }
-    public String getDay(){
+    public int getDay(){
         return this.day;
     }
 }
