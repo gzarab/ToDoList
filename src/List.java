@@ -1,3 +1,55 @@
-public class List {
 
+public class List {
+    private String day;
+    private int month;
+    private int quant;
+    private StringBuilder entry;
+    private String status;
+
+    List(){
+    status = "Done";
+    }
+    List(StringBuilder entry, int quant, String status, String day, int month){
+        this.entry = entry;
+        this.quant = quant;
+        this.status = status;
+        this.month = month;
+        this.day = day;
+    }
+    public String toString(){
+        return String.format("%s : #%d - %s", entry, quant, status);
+    }
+    public boolean equals(List other){
+        return (this.entry == other.entry);
+    }
+    public void setEntry(StringBuilder entry){
+        this.entry = entry;
+    }
+    public void setQuant(int quant){
+        this.quant = quant;
+    }
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public void setMonth(int month){
+        this.month = month;
+    }
+    public void setDay(String day){
+        this.day = day;
+    }
+    public StringBuilder getEntry(){
+        return this.entry;
+    }
+    public int getQuant(){
+        return this.quant;
+    }
+    public String getStatus(){
+        return this.status;
+    }
+    public int getMonth(){
+        return this.month;
+    }
+    public String getDay(){
+        return this.day;
+    }
 }
