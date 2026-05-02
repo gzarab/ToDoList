@@ -1,28 +1,68 @@
-import java.util.Calendar;
 import java.util.ArrayList;
-import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 
 public class App {
+
+    private static ArrayList<String> myToDo = new ArrayList<>();
     public static void main(String[] args) throws Exception {
-        Scanner in = new Scanner(System.in);
-        System.out.println("entry");
-        String ent = in.nextLine();
-        System.out.println("count");
-        int num = in.nextInt();
-        in.nextLine();
-        System.out.println("status");
-        String stat = in.nextLine();
-        System.out.println("day");
-        int day = in.nextInt();
-        System.out.println("month");
-        int month = in.nextInt();
 
-      
-        ArrayList<List> myToDo = new ArrayList<List>();
+        for (int i = 0; i < 8; i++){
+            myToDo.add(" ");
+        }
 
-        myToDo.add(new List(ent, num, stat, day, month));
-        System.out.println(myToDo);
-        in.close();
+        //main frame
+        JFrame mainframe = new JFrame("Weekly To Do List");
+        mainframe.setSize(800,600);
+        mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //borders
+        mainframe.setLayout(new BorderLayout(10,10));
+        //top panels
+        JLabel title = new JLabel("Weekly Planner");
+        title.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+        mainframe.add(title, BorderLayout.NORTH);
+        //boxes
+        JPanel dayGrid = new JPanel(new GridLayout(2,4,10,10));
+        ArrayList<JTextArea> entries = new ArrayList<>();
+
+        for (int i = 0; i < 8; i++){
+            JTextArea textArea = new JTextArea();
+            textArea.setText(myToDo.get(i));
+            
+            entries.add(textArea);
+
+            JScrollPane scroll = new JScrollPane(textArea);
+            scroll.setBorder(BorderFactory.createTitledBorder("Day "+ (i + 1)));
+            dayGrid.add(scroll);
+        }
+
+        JButton saveButton = new JButton("Save");
+        saveButton.addActionListener(e -> {
+            myToDo.clear(); 
+            for (JTextArea box : entries) {
+                myToDo.add(box.getText());
+            }
+            JOptionPane.showMessageDialog(mainframe, "Saved" + myToDo.size() + "boxes");
+            System.out.println("Current To Do List" + myToDo);
+        });
+
+        mainframe.add(dayGrid, BorderLayout.CENTER);
+        mainframe.add(saveButton, BorderLayout.SOUTH);
+
+        mainframe.setSize(800, 600);
+        mainframe.setVisible(true);
     }
 }

@@ -7,8 +7,9 @@ public class List {
     private String status;
 
     List(){
-    status = "Done";
+    status = "Pending";
     }
+    
     List(String entry, int quant, String status, int day, int month){
         this.entry = entry;
         this.quant = quant;
