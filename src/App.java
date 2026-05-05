@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
 
 
 
@@ -45,12 +46,17 @@ public class App {
             entries.add(textArea);
 
             JScrollPane scroll = new JScrollPane(textArea);
-            scroll.setBorder(BorderFactory.createTitledBorder("Day "+ (i + 1)));
+            if (i = 0){
+                scroll.setBorder(BorderFactory.createTitledBorder("Notes"));
+            }
+            else {
+                scroll.setBorder(BorderFactory.createTitledBorder("Day"+ i));
+            }
             dayGrid.add(scroll);
         }
 
         JButton saveButton = new JButton("Save");
-        saveButton.addActionListener(e -> {
+        saveButton.addActionListener(e ->  {
             myToDo.clear(); 
             for (JTextArea box : entries) {
                 myToDo.add(box.getText());
