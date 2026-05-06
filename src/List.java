@@ -3,14 +3,14 @@ public class List {
     private int day;
     private int month;
     private int quant;
-    private String entry;
+    private StringBuilder entry;
     private String status;
 
     List(){
     status = "Pending";
     }
     
-    List(String entry, int quant, String status, int day, int month){
+    List(StringBuilder entry, int quant, String status, int day, int month){
         this.entry = entry;
         this.quant = quant;
         this.status = status;
@@ -23,7 +23,7 @@ public class List {
     public boolean equals(List other){
         return (this.entry == other.entry);
     }
-    public void setEntry(String entry){
+    public void setEntry(StringBuilder entry){
         this.entry = entry;
     }
     public void setQuant(int quant){
@@ -38,7 +38,7 @@ public class List {
     public void setDay(int day){
         this.day = day;
     }
-    public String getEntry(){
+    public StringBuilder getEntry(){
         return this.entry;
     }
     public int getQuant(){
