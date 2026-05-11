@@ -1,56 +1,28 @@
+import java.util.ArrayList;
 
 public class List {
-    private int day;
-    private int month;
-    private int quant;
-    private StringBuilder entry;
+    private ArrayList<Task> tasks = new ArrayList<>();
+
+    public String toString(){
+        StringBuilder sOut = new StringBuilder();
+        for (Task t : tasks){
+            sOut.append(t.toString()).append("\n");
+        }
+        return sOut.toString();
+    }
+    public void addTask(String text, String status){
+       tasks.add(new Task(text, status));
+    }
+}
+class Task {
+    private String text;
     private String status;
 
-    List(){
-    status = "Pending";
-    }
-    
-    List(StringBuilder entry, int quant, String status, int day, int month){
-        this.entry = entry;
-        this.quant = quant;
+    Task(String text, String status) {
+        this.text = text;
         this.status = status;
-        this.month = month;
-        this.day = day;
     }
     public String toString(){
-        return String.format("%s : #%d - %s", entry, quant, status);
-    }
-    public boolean equals(List other){
-        return (this.entry == other.entry);
-    }
-    public void setEntry(StringBuilder entry){
-        this.entry = entry;
-    }
-    public void setQuant(int quant){
-        this.quant = quant;
-    }
-    public void setStatus(String status){
-        this.status = status;
-    }
-    public void setMonth(int month){
-        this.month = month;
-    }
-    public void setDay(int day){
-        this.day = day;
-    }
-    public StringBuilder getEntry(){
-        return this.entry;
-    }
-    public int getQuant(){
-        return this.quant;
-    }
-    public String getStatus(){
-        return this.status;
-    }
-    public int getMonth(){
-        return this.month;
-    }
-    public int getDay(){
-        return this.day;
+        return String.format("[%s] %s", status, text);
     }
 }
