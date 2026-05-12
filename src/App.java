@@ -17,12 +17,21 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import java.util.Calendar;
-
+/**
+ * Weekly to do list
+ * @author Gabriel Zarabanda
+ * @since 05/11/2026
+ */
 public class App {
 
     private static ArrayList<List> myToDo = new ArrayList<>();
     private static ArrayList<JTextArea> displayArea = new ArrayList<>();
     private static String[] weekDays=  new String[8];
+    /**
+     * Gui for Weekly to do list
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
@@ -49,7 +58,7 @@ public class App {
         mainframe.add(title, BorderLayout.NORTH);
 
         //boxes
-        JPanel dayGrid = new JPanel(new GridLayout(4,2,10,10));
+        JPanel dayGrid = new JPanel(new GridLayout(2,4,10,10));
         for (int i = 0; i < 8; i++){
             JTextArea display = new JTextArea();//for display boxes
             display.setEditable(false);
@@ -91,6 +100,29 @@ public class App {
                 JOptionPane.showMessageDialog(mainframe, exception.getMessage());
             }
         });
+        JButton ediButton = new JButton("Edit");
+        ediButton.addActionListener(e ->{
+            int dayIndex = dayPicker.getSelectedIndex();
+            List selectedList = myToDo.get(dayIndex);
+            if(selectedList.getTasks().isEmpty()){
+                JOptionPane.showMessageDialog(mainframe, "No Tasks to edit");
+                return;
+            }
+            Object[] taskOptions = selectedList.getTasks().toArray();
+            List.Task selectedTask = (List.Task) JOptionPane.showInputDialog(mainframe, "Select Task", "Edit Task", JOptionPane.QUESTION_MESSAGE, null, taskOptions, taskOptions[0]);
+            if (selectedTask != null){
+                int taskIndex = selectedList.getTasks().indexOf(selectedTask);
+                String newText =JOptionPane.showInputDialog(mainframe, "Update Task", selectedTask.getText());
+                if (newText != null && !newText.trim().isEmpty()){
+                    String newStatus = (String) JOptionPane.showInputDialog(mainframe, "Update Status:", "Edit Status", JOptionPane.QUESTION_MESSAGE, null, statuses, selectedTask.getStatus());
+                    if (newStatus != null){
+                        selectedList.updateTask(taskIndex, newText, newStatus);
+                        displayArea.get(dayIndex).setText(selectedList.toString());
+                        JOptionPane.showMessageDialog(mainframe, "Task Updated");
+                    }
+                }
+            }
+        });
 
         inputPanel.add(new JLabel("New Entry:"), BorderLayout.WEST);
         inputPanel.add(entryField, BorderLayout.CENTER);
@@ -100,10 +132,11 @@ public class App {
         buttonGroup.add(statusPicker);
         buttonGroup.add(dayPicker);
         buttonGroup.add(saveButton);
+        buttonGroup.add(ediButton);
         inputPanel.add(buttonGroup, BorderLayout.EAST);
         
         mainframe.add(inputPanel, BorderLayout.SOUTH);
-        mainframe.setSize(600, 600);
+        mainframe.setSize(700, 500);
         mainframe.setVisible(true);
     }
 }
