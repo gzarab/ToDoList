@@ -33,10 +33,13 @@ public class App {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();//invoques calendar class for box titles
         cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
         SimpleDateFormat form = new SimpleDateFormat("EEEE MM/dd");
 
+        /**
+         * adds days to todo arraylist, except for when i == 0
+         */
         weekDays[0] = "Notes";
         for (int i = 0; i < 8; i++){
             weekDays[i] = (i == 0) ? "Notes" : form.format(cal.getTime());
@@ -45,50 +48,48 @@ public class App {
                 cal.add(Calendar.DATE, 1);
         }
 
-        //main frame
+        /**
+         * Creates JFrame
+         */
         JFrame mainframe = new JFrame("Weekly To Do List");
         mainframe.setSize(600,600);
         mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //borders
-        mainframe.setLayout(new BorderLayout(10,10));
-        //top panels
-        JLabel title = new JLabel("Weekly Planner", SwingConstants.CENTER);
+        mainframe.setLayout(new BorderLayout(10,10)); // mainframe border
+        
+        JLabel title = new JLabel("Weekly Planner", SwingConstants.CENTER); //Title label
         title.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
         mainframe.add(title, BorderLayout.NORTH);
 
-        //boxes
-        JPanel dayGrid = new JPanel(new GridLayout(2,4,10,10));
+        JPanel dayGrid = new JPanel(new GridLayout(2,4,10,10)); //creation of 8 panels
         for (int i = 0; i < 8; i++){
-            JTextArea display = new JTextArea();//for display boxes
+        JTextArea display = new JTextArea();//for text display
             display.setEditable(false);
             display.setLineWrap(true);
             display.setWrapStyleWord(true);
             displayArea.add(display);
 
-            JScrollPane scroll = new JScrollPane(display);
-            scroll.setBorder(BorderFactory.createTitledBorder(weekDays[i]));//box titles
+            JScrollPane scroll = new JScrollPane(display); //internal boxes display scroll bar
+            scroll.setBorder(BorderFactory.createTitledBorder(weekDays[i])); //titles for boxes
             dayGrid.add(scroll);
         }
         mainframe.add(dayGrid, BorderLayout.CENTER);
 
-        //input
-        JPanel inputPanel = new JPanel(new BorderLayout(5,5));
+        JPanel inputPanel = new JPanel(new BorderLayout(5,5)); //input panel
         JTextField entryField = new JTextField();
-        JComboBox<String> dayPicker = new JComboBox<>(weekDays);
-        //status
+        JComboBox<String> dayPicker = new JComboBox<>(weekDays); //combobox selection from weekdays
+        
         String[] statuses = {"Pending", "In Progress", "Completed"};
-        JComboBox<String> statusPicker = new JComboBox<>(statuses);
+        JComboBox<String> statusPicker = new JComboBox<>(statuses); //combobox selection of status
 
-        //save button
-        JButton saveButton = new JButton("Save");
+        JButton saveButton = new JButton("Save"); //Save button
         saveButton.addActionListener(e ->  {
-            int index = dayPicker.getSelectedIndex();
-            String text = entryField.getText().trim();
-            String status = (String) statusPicker.getSelectedItem();
+            int index = dayPicker.getSelectedIndex(); 
+            String text = entryField.getText().trim(); 
+            String status = (String) statusPicker.getSelectedItem(); 
             try {
                 if(text.isEmpty()){
-                    throw new Exception("Entry cannot be blank");
+                    throw new Exception("Entry cannot be blank"); //check if text is blank
                 }
                 myToDo.get(index).addTask(text, status);
                 displayArea.get(index).setText(myToDo.get(index).toString());
@@ -97,10 +98,11 @@ public class App {
                 statusPicker.setSelectedIndex(0);
             }
             catch (Exception exception) {
-                JOptionPane.showMessageDialog(mainframe, exception.getMessage());
+                JOptionPane.showMessageDialog(mainframe, exception.getMessage());// gets exception message
             }
         });
-        JButton ediButton = new JButton("Edit");
+
+        JButton ediButton = new JButton("Edit"); //edit button
         ediButton.addActionListener(e ->{
             int dayIndex = dayPicker.getSelectedIndex();
             List selectedList = myToDo.get(dayIndex);

@@ -1,8 +1,11 @@
 import java.util.ArrayList;
-
+/**
+ * List class extablishes arraylist for tasks
+ */
 public class List {
     private ArrayList<Task> tasks = new ArrayList<>();
     /**
+     * Takes output from task class and prints stringbuilder
      * @return String
      */
     public String toString(){
