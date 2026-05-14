@@ -70,7 +70,7 @@ public class App {
             displayArea.add(display);
 
             JScrollPane scroll = new JScrollPane(display); //internal boxes display scroll bar
-            scroll.setBorder(BorderFactory.createTitledBorder(weekDays[i])); //titles for boxes
+            scroll.setBorder(BorderFactory.createTitledBorder(weekDays[i]));
             dayGrid.add(scroll);
         }
         mainframe.add(dayGrid, BorderLayout.CENTER);

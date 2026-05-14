@@ -11,6 +11,7 @@ each box has a title that contains the day of the week and the date of the week
 Top of box has the weekly title
 center of box contains text display boxes
 bottom contains entry box, status selector, box selector, save and edit button
+edit button edits based on date selected in box selector
 
 ## Class overview
 
