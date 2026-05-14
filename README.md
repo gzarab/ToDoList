@@ -17,7 +17,7 @@ edit button edits based on date selected in box selector
 
 App: creates 4 ArrayLists:
                 myTodo: Recieves entries and statuses and stores them
-                displayArea: stores display boxes data
+                displayArea: stores display boxes data from my todo arraylist
                 dayPicker: stores weekday array
                 statusPicker: stores statuses array
     Creates GUI for interaction.

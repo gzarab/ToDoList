@@ -111,16 +111,16 @@ public class App {
                 return;
             }
             Object[] taskOptions = selectedList.getTasks().toArray();
-            List.Task selectedTask = (List.Task) JOptionPane.showInputDialog(mainframe, "Select Task", "Edit Task", JOptionPane.QUESTION_MESSAGE, null, taskOptions, taskOptions[0]);
+            List.Task selectedTask = (List.Task) JOptionPane.showInputDialog(mainframe, "Select Task", "Edit Task", JOptionPane.QUESTION_MESSAGE, null, taskOptions, taskOptions[0]); // first popup box for task editing
             if (selectedTask != null){
                 int taskIndex = selectedList.getTasks().indexOf(selectedTask);
-                String newText =JOptionPane.showInputDialog(mainframe, "Update Task", selectedTask.getText());
+                String newText =JOptionPane.showInputDialog(mainframe, "Update Task", selectedTask.getText()); //text update option box
                 if (newText != null && !newText.trim().isEmpty()){
-                    String newStatus = (String) JOptionPane.showInputDialog(mainframe, "Update Status:", "Edit Status", JOptionPane.QUESTION_MESSAGE, null, statuses, selectedTask.getStatus());
+                    String newStatus = (String) JOptionPane.showInputDialog(mainframe, "Update Status:", "Edit Status", JOptionPane.QUESTION_MESSAGE, null, statuses, selectedTask.getStatus()); //status update box
                     if (newStatus != null){
                         selectedList.updateTask(taskIndex, newText, newStatus);
                         displayArea.get(dayIndex).setText(selectedList.toString());
-                        JOptionPane.showMessageDialog(mainframe, "Task Updated");
+                        JOptionPane.showMessageDialog(mainframe, "Task Updated"); //completion 
                     }
                 }
             }
